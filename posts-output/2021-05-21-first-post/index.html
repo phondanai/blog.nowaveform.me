@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"><![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"><![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"><!--<![endif]-->
+<head>
+    <!-- Website Template designed by www.downloadwebsitetemplates.co.uk -->
+    <!-- Modified to fit Cryogen.-->
+    <meta charset="UTF-8">
+    <title>Phondanai&#39;s blog: Random things in my random life: วิธีการใช้ Cryogen สำหรับสร้าง static website</title>
+    
+<meta name="keywords" content="ring,clojure,cryogen">
+
+<meta name="description" content="CryogenCRYOGEN เป็น">
+
+<meta property="og:description" content="CryogenCRYOGEN เป็น">
+
+<meta property="og:url" content="https://blog.nowaveform.me/posts-output/2021-05-21-first-post/" />
+<meta property="og:title" content="วิธีการใช้ Cryogen สำหรับสร้าง static website" />
+<meta property="og:type" content="article" />
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57.png">
+    <link rel="shortcut icon" href="images/ico/favicon.png">
+    <!--[if IE]><![endif]-->
+    <link href="/css/buttons.css" rel="stylesheet" type="text/css" />
+    <link href="/css/menu.css" rel="stylesheet" type="text/css" />
+    <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/typography.css" rel="stylesheet" type="text/css" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/tomorrow-night-eighties.min.css">
+    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BC7XL0SV95"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-BC7XL0SV95');
+    </script>
+</head>
+<body>
+
+<div id="left">
+
+    <p id="logo">
+        <a title="Phondanai&#39;s blog: Random things in my random life" href="/">
+            <span class="fa fa-cut"></span>
+            <span class="text">λ</span>
+        </a>
+    </p>
+
+    <div id="menucont" class="bodycontainer clearfix">
+        <div class="menutitle">
+            <p><span class="fa fa-reorder"></span><strong>Menu</strong></p>
+        </div>
+        <ul class="menu">
+            <li ><a title="Home" href="/">Home</a></li>
+            <li ><a title="Archives" href="/archives/">Archives</a></li>
+            
+            <li ><a title="Tags" href="/tags/">Tags</a></li>
+            
+            
+            <li >
+                <a href="/pages-output/about/">About Me</a>
+            </li>
+            
+            <li><a title="RSS" href="/feed.xml">RSS</a></li>
+        </ul>
+    </div>
+
+    <div id="socialmedia" class="clearfix">
+        <ul>
+            <li><a title="GitHub" href="https://github.com/phondanai" rel="external"><span class="fa fa-github"></span></a></li>
+        </ul>
+    </div>
+
+</div>
+
+<div id="right" class="clearfix">
+    
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <strong>May 21, 2021</strong>
+        
+    </div>
+    <h1>วิธีการใช้ Cryogen สำหรับสร้าง static website</h1>
+</div>
+<div>
+    <ol class="toc"><li><a href="#cryogen">Cryogen</a></li><li><a href="#สงทตองม">สิ่งที่ต้องมี</a></li><li><a href="#การใชงาน">การใช้งาน</a></li><ol><li><a href="#สรางไซตใหม">สร้างไซต์ใหม่</a></li><li><a href="#รน-server-ขนมา">รัน server ขึ้นมา</a></li><li><a href="#ตงคาตางๆ-ของเวบไซต">ตั้งค่าต่างๆ ของเว็บไซต์</a></li></ol><li><a href="#เอาเวบเราไปอพไวบนโฮสตง">เอาเว็บเราไปอัพไว้บนโฮสติ้ง</a></li></ol>
+    <h2 id="cryogen">Cryogen</h2><p><a href="http://cryogenweb.org">CRYOGEN</a> เป็น</p><ul><li>เครื่องมือสำหรับใช้สร้าง static site ประเภท blogging</li><li>พัฒนาโดยใช้ภาษา Clojure</li><li>รองรับการเขียนโดยใช้ Markdown และ AsciiDoc</li><li>มี syntax highlight สำหรับแสดงผลโค้ด</li><li>และอื่นๆ</li></ul><h2 id="สงทตองม">สิ่งที่ต้องมี</h2><ul><li><a href="https://clojure.org">Clojure</a></li><li><a href="https://github.com/technomancy/leiningen">Leiningen</a> เวอร์ชัน 2.5.0 ขึ้นไป</li></ul><h2 id="การใชงาน">การใช้งาน</h2><h3 id="สรางไซตใหม">สร้างไซต์ใหม่</h3><p>โดยการใช้ Cryogen template:</p><pre><code>lein new cryogen my-blog
+</code></pre><p>หรือ อีกวิธี ใช้ <a href="https://github.com/seancorfield/clj-new/"><code>clj-new</code></a>:</p><pre><code>clojure -X:new create :template cryogen :name me.my-blog
+</code></pre><h3 id="รน-server-ขนมา">รัน server ขึ้นมา</h3><p>เราสามารถรันเว็บขอเราขึ้นมาดูได้ อยู่ในไดเรกทอรี่ <code>my-blog</code> โดยใช้ Leiningen:</p><pre><code class="bash">lein serve # หรือ lein serve-fast
+</code></pre><p>หรือ tools-deps:</p><pre><code class="bash">clojure -X:serve # or clojure -X:serve-fast
+</code></pre><p>เมื่อ server start ขึ้นมาแล้ว ใช้ browser เปิดไปที่ <a href="http://localhost:3000">localhost:3000</a></p><p>ตัว server จะ monitor การแก้ไขไฟล์ที่อยู่ในโฟลเดอร์ <code>content</code> และ <code>themes</code> และ คอมไพล์ให้ใหม่โดยอัตโนมัติ. The <code>*-fast</code> variants perform <a href="https://cryogenweb.org/docs/fast-compilation.html">fast but partial compilation</a> of only the changed page/post.</p><p>หรือถ้าอยากจะ generate เว็บโดยที่ไม่ต้องรัน server ขึ้นมาเลยก็ทำได้ โดยใช้คำสั่ง:</p><pre><code>lein run
+</code></pre><p>หรือ:</p><pre><code>clojure -M:build
+</code></pre><h3 id="ตงคาตางๆ-ของเวบไซต">ตั้งค่าต่างๆ ของเว็บไซต์</h3><p>เราสามารถตั้งค่าต่างๆ ของเว็บไซต์ได้ โดยแก้ไขไฟล์ <code>content/config.edn</code>, ซึ่งมีค่าต่างๆ ประมาณนี้:</p><pre><code class="clojure">{:site-title                   "My Awesome Blog"
+ :author                       "Bob Bobbert"
+ :description                  "This blog is awesome"
+ :site-url                     "http://blogawesome.com/"
+ :post-root                    "posts"
+ :page-root                    "pages"
+ :post-root-uri                "posts-output"
+ :page-root-uri                "pages-output"
+ :tag-root-uri                 "tags-output"
+ :author-root-uri              "authors-output"
+ :public-dest                  "public"
+ :blog-prefix                  "/blog"
+ :rss-name                     "feed.xml"
+ :rss-filters                  ["cryogen"]
+ :recent-posts                 3
+ :post-date-format             "yyyy-MM-dd"
+ :archive-group-format         "yyyy MMMM"
+ :sass-src                     []
+ :sass-path                    "sass"
+ :theme                        "blue"
+ :resources                    ["img"]
+ :keep-files                   [".git"]
+ :disqus?                      false
+ :disqus-shortname             ""
+ :ignored-files                [#"\.#.*" #".*\.swp$"]
+ :previews?                    false
+ :posts-per-page               5
+ :blocks-per-preview           2
+ :clean-urls                   :trailing-slash
+ :collapse-subdirs?            false
+ :hide-future-posts?           true
+ :klipse                       {}
+ :description-include-elements #{:p :h1 :h2 :h3 :h4 :h5 :h6}
+ :debug?                       false}
+</code></pre><p>รายละเอียดเกี่ยวกับค่าต่างๆ นั้น ไปหาอ่านเอาที่เว็บ <a href="http://cryogenweb.org/docs/configuration.html">http://cryogenweb.org/docs/configuration.html</a></p><h2 id="เอาเวบเราไปอพไวบนโฮสตง">เอาเว็บเราไปอัพไว้บนโฮสติ้ง</h2><p>หลังจาก generate แล้ว ไฟล์ที่เราต้องการนั้นจะอยู่ในโฟลเดอร์ <code>public</code> สิ่งที่ต้องทำก็คือ copy ไฟล์ทั้งหมดไปไว้ที่โฟลเดอร์ที่อยู่บนโฮสติ้งที่รันด้วย Nginx หรือ Apache</p><p>ตัวอย่างการตั้งค่า Nginx ในไฟล์ <code>/etc/nginx/sites-available/default</code>:</p><pre><code class="javascript">server {
+  listen 80 default_server;
+  listen [::]:80 default_server ipv6only=on;
+  server_name localhost &lt;yoursite.com&gt; &lt;www.yoursite.com&gt;;
+
+  access_log  /var/log/blog_access.log;
+  error_log   /var/log/blog_error.log;
+
+  location / {
+    alias       /var/blog/;
+    error_page  404 = /404.html;
+  }
+}
+</code></pre><p>แก้ส่วน <code>yoursite.com</code> ไปเป็นชื่อโดเมนของเรา โดยไฟล์ที่เรา copy มานั้นอยู่ในโฟลเดอร์ <code>/var/blog/</code> บน server</p><p>ข้อมูลเพิ่มเติมสามารถไปดูได้ที่ <a href="http://cryogenweb.org/docs/deploying-to-github-pages.html">หน้านี้</a>.</p>
+</div>
+
+<div id="post-tags">
+    <br/> 
+    <b>Tags: </b>
+    
+    <a href="/tags-output/cryogen/">cryogen</a>
+    
+    <a href="/tags-output/clojure/">clojure</a>
+    
+</div>
+
+<br/>
+
+
+    <div id="prev-next">
+        
+        <a class="button" href="/posts-output/2021-06-01-clojure-ring-1/">&laquo; Clojure Ring เบื้องต้น [1]</a>
+        
+        
+    </div>
+
+    
+
+
+</div>
+
+<div>
+ <!doctype html><html lang="en"><head><meta charset="UTF-8"><title>Glosa static integration</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><link href="/css/glosa/mobile.min.css" rel="stylesheet" media="all and (max-width: 600px)"><link href="/css/glosa/desktop.min.css" rel="stylesheet" media="all and (min-width: 600px)"><script src="/js/vendors/vue.min.js"></script><script src="/js/vendors/axios.min.js"></script><script src="/js/vendors/ramda.min.js"></script><script defer="defer" src="/js/glosa.min.js"></script></head><body><section id="app-comments" class="comments"><!-- Head --><div class="comments__header"><div><button @click="openNewComment()" class="button comments-header__button-plus"><img alt="Add comment" class="comments-header__button-plus-img" src="/img/add-outline.svg"></button></div><p class="comments-header__count">{{ comments.length }} comments</p></div><!-- End head --><!-- New comment --><div class="new-comment" :class="{ 'show': showNewComment }"><div class="new-comment__position"><div class="new-comment__header"><div><button @click="closeNewComment()" class="button new-comment__button-close"><img alt="close" class="new-comment__button-plus-img" src="/img/close.svg"></button></div><p v-if="reply === undefined" class="new-comment__title">New comment</p><p v-else class="new-comment__title">Reply &nbsp;<strong>{{ formatEllipsisAuthor(replyComment.author) }}</strong></p></div><form><p><input v-model="newCommentAuthor" :disabled="this.loadingNewComment" maxlength="20" class="new-comment__author" type="text" placeholder="Name..."></p><p><textarea v-model="newCommentContent" :disabled="this.loadingNewComment" class="new-comment__content" placeholder="Message..."></textarea></p><div class="switch-button-policy"><!-- Checkbox --> <input v-model="policy" type="checkbox" name="switch-button" id="switch-label" class="switch-button__checkbox"><!-- Botón --> <label for="switch-label" class="switch-button__label"></label> <span class="switch-button-policy__text">I accept the policy of <a class="switch-button-policy__link" href="#">Data Protection</a>.</span></div><p class="new-comment__content-submit"><button class="new-comment__submit" type="button" @click="sendNewComment" :class="{ 'new-comment__submit--loading': loadingNewComment, 'new-comment__submit--success': stateNewComment === 'success', 'new-comment__submit--error': stateNewComment === 'error' }" :disabled="!isSubmit"><span v-if="!loadingNewComment && stateNewComment === undefined">Post</span> <span v-else-if="stateNewComment === 'success'">Published!</span> <span v-else-if="stateNewComment === 'error'">Whoops! Something has gone wrong, do we try again?</span> <span v-else>Sending...</span></button></p></form></div></div><!-- End new comment --><!-- Comments --><div v-if="commentsParent.length > 0" class="comments__list"><comment v-for="comment in commentsParent" :id="comment.id" :comments="comments"></div><!-- End Comments --><!-- No comments --><p v-else class="comments__clear">Write the first comment</p><!-- End no comments --></section><!-- Template comment  --><template id="comment"><div class="comment"><div class="comment__header"><!-- Date --><div class="comment__create-at">{{ formatDate(fields.createdAt) }}</div><!-- End date --><!-- Author --><div class="comment__author">{{ formatEllipsisAuthor(fields.author) }}</div><!-- End author --><!-- Button new comment --> <button class="button comment__reply" @click="openReply(id)"><img class="comment__reply-img" alt="Reply" src="/img/reply.svg"></button><!-- End button new comment --></div><!-- Separator --><hr class="comment__line"><!-- End separator --><!-- Content --><div class="comment__content">{{ filterHTMLTags(fields.message) }}</div><!-- End content --> <comment v-for="child in childs" :id="child.id" :comments="comments" :class="{ 'comment--child': child.deep <= maxDeep }"></div></template><!-- End template comment --></body></html>
+</div>
+
+
+<hr/>
+<div id="footercont" class="clearfix">Copyright &copy; 2021 Phondanai Khanti
+    <p>Powered by <a href="http://cryogenweb.org">Cryogen</a> | Free Website Template by <a title="free website templates" href="http://www.downloadwebsitetemplates.co.uk" rel="external">Download Website Templates</a></p>
+
+</div>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="/js/scripts.js" type="application/javascript"></script>
+
+
+</body>
+</html>

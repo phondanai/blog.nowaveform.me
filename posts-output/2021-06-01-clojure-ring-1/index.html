@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"><![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"><![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"><!--<![endif]-->
+<head>
+    <!-- Website Template designed by www.downloadwebsitetemplates.co.uk -->
+    <!-- Modified to fit Cryogen.-->
+    <meta charset="UTF-8">
+    <title>Phondanai&#39;s blog: Random things in my random life: Clojure Ring เบื้องต้น [1]</title>
+    
+<meta name="keywords" content="ring,clojure,cryogen">
+
+<meta name="description" content="วันนี้จะมาลองอธิบายการสร้างเว็บด้วย Clojure โดยใช้ library ที่ชื่อว่า ring กัน
+โดยตัวอย่างที่ยกมา เอามาจากหน้า wiki ของ ring ใน githubเกี่ยวกับ Ring">
+
+<meta property="og:description" content="วันนี้จะมาลองอธิบายการสร้างเว็บด้วย Clojure โดยใช้ library ที่ชื่อว่า ring กัน
+โดยตัวอย่างที่ยกมา เอามาจากหน้า wiki ของ ring ใน githubเกี่ยวกับ Ring">
+
+<meta property="og:url" content="https://blog.nowaveform.me/posts-output/2021-06-01-clojure-ring-1/" />
+<meta property="og:title" content="Clojure Ring เบื้องต้น [1]" />
+<meta property="og:type" content="article" />
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57.png">
+    <link rel="shortcut icon" href="images/ico/favicon.png">
+    <!--[if IE]><![endif]-->
+    <link href="/css/buttons.css" rel="stylesheet" type="text/css" />
+    <link href="/css/menu.css" rel="stylesheet" type="text/css" />
+    <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/typography.css" rel="stylesheet" type="text/css" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/tomorrow-night-eighties.min.css">
+    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BC7XL0SV95"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-BC7XL0SV95');
+    </script>
+</head>
+<body>
+
+<div id="left">
+
+    <p id="logo">
+        <a title="Phondanai&#39;s blog: Random things in my random life" href="/">
+            <span class="fa fa-cut"></span>
+            <span class="text">λ</span>
+        </a>
+    </p>
+
+    <div id="menucont" class="bodycontainer clearfix">
+        <div class="menutitle">
+            <p><span class="fa fa-reorder"></span><strong>Menu</strong></p>
+        </div>
+        <ul class="menu">
+            <li ><a title="Home" href="/">Home</a></li>
+            <li ><a title="Archives" href="/archives/">Archives</a></li>
+            
+            <li ><a title="Tags" href="/tags/">Tags</a></li>
+            
+            
+            <li >
+                <a href="/pages-output/about/">About Me</a>
+            </li>
+            
+            <li><a title="RSS" href="/feed.xml">RSS</a></li>
+        </ul>
+    </div>
+
+    <div id="socialmedia" class="clearfix">
+        <ul>
+            <li><a title="GitHub" href="https://github.com/phondanai" rel="external"><span class="fa fa-github"></span></a></li>
+        </ul>
+    </div>
+
+</div>
+
+<div id="right" class="clearfix">
+    
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <strong>June 1, 2021</strong>
+        
+    </div>
+    <h1>Clojure Ring เบื้องต้น [1]</h1>
+</div>
+<div>
+    
+    <p>วันนี้จะมาลองอธิบายการสร้างเว็บด้วย Clojure โดยใช้ library ที่ชื่อว่า <code>ring</code> กัน
+โดยตัวอย่างที่ยกมา เอามาจากหน้า <a href="https://github.com/ring-clojure/ring/wiki">wiki ของ ring ใน github</a></p><h2 id="เกยวกบ-ring">เกี่ยวกับ Ring</h2><p><a href="https://github.com/ring-clojure/ring">ring</a> คือ</p><ul><li>Library ที่ใช้กันแพร่หลาย สำหรับพัฒนาเว็บโดยใช้ภาษา Clojure</li><li>สามารถสร้างเว็บและคอมไพล์ให้เป็น Java servelt ได้</li><li>สร้าง package Java war เพื่อเอาไป deploy ต่อได้ง่าย</li></ul><h2 id="สงทตองม">สิ่งที่ต้องมี</h2><ul><li><a href="https://clojure.org">Clojure</a></li><li><a href="https://github.com/technomancy/leiningen">Leiningen</a></li></ul><h2 id="hello-ring">hello ring</h2><p>ต่อไปเราจะเริ่มสร้างเว็บแบบง่ายๆ กัน</p><ul><li>สร้าง project ใหม่ด้วย Leiningen:</li></ul><pre><code class="bash">$ lein new hello-world
+$ cd hello-world
+</code></pre><ul><li>เพิ่ม <code>ring-core</code> และ <code>ring-jetty-adapter</code> ลงใน dependencies ในไฟล์ <code>project.clj</code></li></ul><pre><code class="clojure">(defproject hello-world "0.1.0-SNAPSHOT"
+  :description "FIXME: write description"
+  :url "http://example.com/FIXME"
+  :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
+            :url "https://www.eclipse.org/legal/epl-2.0/"}
+  :dependencies [[org.clojure/clojure "1.10.0"]
+                 [ring/ring-core "1.8.2"]
+                 [ring/ring-jetty-adapter "1.8.2"]]
+  :repl-options {:init-ns hello-world.core})
+</code></pre><p>ดาวน์โหลด dependencies:</p><pre><code class="bash">$ lein deps
+</code></pre><p>ในไฟล์ <code>src/hello-world/core.clj</code> ให้สร้าง handler อย่างง่ายขึ้นมา (handler ก็คือฟังก์ชัน)</p><pre><code class="clojure">(ns hello-world.core)
+
+(defn handler [request]
+  {:status 200
+   :headers {"Content-Type" "text/html"}
+   :body "Hello World"})
+</code></pre><p>จากนั้นให้ start REPL ขึ้นมาโดยใช้ Leiningen</p><pre><code class="bash">$ lein repl
+</code></pre><p>หลังจาก REPL รันขึ้นมาแล้ว, รัน Jetty ขึ้นมาเพื่อใช้ handler ที่เราสร้างขึ้น (<a href="https://www.eclipse.org/jetty/">Jetty</a> คือ web server ตัวนึง)</p><pre><code class="clojure">=&gt; (use 'ring.adapter.jetty)
+=&gt; (use 'hello-world.core)
+=&gt; (run-jetty handler {:port 3000
+                       :join? false)
+</code></pre><p>web server จะถูกรันขึ้นมา โดยตอนนี้สามารถเปิดเว็บเบราว์เซอร์ขึ้นมาแล้วเปิดหน้าเว็บ <a href="http://localhost:3000/">http://localhost:3000/</a> เพื่อดูผลลัพธ์</p><p><img src="img/run_result.png" alt="result" title="result" /></p><p>เอาล่ะ ตอนนี้เราก็ได้เว็บง่ายๆ โง่ๆ มาอันนึงที่ response กลับมาทุกครั้งว่า Hello World
+เรามาดู concept ที่ใช้ใน <code>ring</code> กัน ว่ามีไรบ้าง</p><h2 id="ring-concepts">Ring concepts</h2><p>ใน ring จะมี concepts หลักๆ อยู่ 4 อย่าง</p><ul><li>Handler</li><li>Request</li><li>Response</li><li>Middleware</li></ul><h3 id="handlers">Handlers</h3><p>Handlers ก็คือฟังก์ชันนี่แหละ ที่คอยรับ HTTP request --&gt; process request --&gt; ส่ง response กลับมา
+, โดย request กับ response ใน handler เนี่ย จะอยู่ในรูปแบบ <code>Clojure map</code> และ ring จะจัดการที่เหลือให้ (เช่น แปลงเป็น  HTTP reponse string)</p><p>ตัวอย่าง handler ที่โชว์ ip address ของ client ที่ส่ง request เข้ามา</p><pre><code class="clojure">(defn what-is-my-ip [request]
+  {:status 200
+   :headers {"Content-Type" "text/plain"}
+   :body (:remote-addr request)})
+</code></pre><p><img src="img/remote_ip.png" alt="remote address" title="remote address" /></p><p>จะเห็นได้ว่า ตัวอย่างนั้นใช้การดึงค่าออกมาจาก request map โดยใช้คีย์ <code>:remote-addr</code></p><h3 id="requests">Requests</h3><p>HTTP request จะอยู่ในรูปแบบ <code>Clojure map</code> ซึ่งก็จะมี keys มาตรฐานติดมา และก็ยังสามารถมี key ที่ custom เพิ่มเองได้
+เช่น สร้างมาจาก middleware</p><p>key มาตรฐาน</p><ul><li><code>:server-port</code> - พอร์ตของ server ที่ request เรียกเข้ามา</li><li><code>:server-name</code> - ชื่อของ server ที่ request เรียกเข้ามา</li><li><code>:remote-addr</code> - Ip address ของ client request ที่เรียกเข้ามา &lt;-- ที่ใช้ในตัวอย่างข้างบน</li><li><code>:uri</code> - URI หรือ path ที่ request เรียกเข้ามา</li><li><code>:query-string</code> - ตรงตัวเลยคือ query-string</li><li><code>:scheme protocol</code> - ที่ใช้ request  เช่น :http หรือ :https</li><li><code>:request-method</code> - request method ที่เรียกมา เช่น :get, :head, :options, :put, :post หรือ :delete</li><li><code>:headers</code> - Clojure map ของชื่อ header ต่างๆ</li><li><code>:body</code> - InputStream จาก request body</li></ul><h3 id="responses">Responses</h3><p>Response map นั้น จะถูกสร้างขึ้นมาโดย handler ซึ่งมีทั้งหมด 3 key หลัก:</p><ul><li><code>:status</code> HTTP status code เช่น 200, 302, 404</li><li><code>:headers</code> Clojure map ของ ชื่อ HTTP header</li><li><code>:body</code> ตรงนี้จะเป็น response ที่จะตอบกลับไปยัง request, body ใน ring จะรองรับข้อมูลอยู่ 4 ประเภท คือ
+<ul><li><code>string</code> ส่ง string ตรงๆ ไปยัง client</li><li><code>ISeq</code> แต่ละสมาชิกใน seq จะถูกส่งไปเป็น string</li><li><code>File</code> เนื้อหาในไฟล์จะถูกส่งไปยัง client</li><li><code>InputStream</code> เนื้อหาใน stream จะถูกส่งไปยัง client จนกว่า stream จะปิด</li></ul></li></ul><h3 id="middleware">Middleware</h3><p>middleware คือส่วนที่ทำให้เพิ่มความสามารถให้กับ handler ได้ (ในเอกสารเรียกว่าเป็น higher-level function)
+middleware นั้น รับ handler เป็น input และ output ก็เป็น handler เช่นกัน
+แต่ข้างในจะมีการเพิ่มเติมข้อมูลลงไป เช่น เปลี่ยน header หรืออะไรก็แล้วแต่</p><p>ตัวอย่าง middleware</p><pre><code class="clojure">(defn wrap-content-type [handler content-type]
+  (fn [request]
+    (let [response (handler request)]
+      (assoc-in response [:headers "Content-Type"] content-type))))
+</code></pre><p>จะเห็นว่า middleware นั้น return ออกมาเป็นฟังก์ชัน หรือ handler นี่แหละ
+ข้างในจะมีการเปลี่ยน header <code>"Content-Type"</code> ให้เป็นตามตัวแปร <code>content-type</code></p><p>ตัวอย่างการใช้ middleware</p><pre><code class="clojure">(def app
+  (wrap-content-type handler "text/html"))
+</code></pre><p>จากตัวอย่างแปลว่า มีการเปลี่ยน header <code>"Content-Type"</code> ให้กลายเป็นประเภท <code>"text/html"</code></p><p>โดยปกติแล้ว เราสามารถซ้อน middleware ต่อกันไปได้เรื่อยๆ (เค้าเรียกว่า chain อ่ะนะ) กี่ชั้นก็ว่าไป
+Clojure ก็จะมี threading macro (<code>-&gt;</code>) syntax เพื่อช่วยในการ chain middleware ต่างๆ เช่น</p><pre><code class="clojure">(def app
+  (-&gt; handler
+      (wrap-content-type "text/html")
+      (wrap-keyword-params)
+      (wrap-params)))
+</code></pre><p>middleware นั้นถูกใช้เป็นเรื่องปกติใน Ring, ไม่ว่าจะช่วยในเรื่องการจัดการ parameters, sessions หรือ อัพโหลดไฟล์
+ทั้งหมดทั้งมวลนี้ถูกจัดการโดยใช้ middleware ของ Ring</p><p>เอาล่ะคงเท่านี้ก่อน เพราะน่าจะยาวแล้ว</p>
+</div>
+
+<div id="post-tags">
+    <br/> 
+    <b>Tags: </b>
+    
+    <a href="/tags-output/ring/">ring</a>
+    
+    <a href="/tags-output/clojure/">clojure</a>
+    
+</div>
+
+<br/>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right button" href="/posts-output/2021-05-21-first-post/">วิธีการใช้ Cryogen สำหรับสร้าง static website &raquo;</a>
+        
+    </div>
+
+    
+
+
+</div>
+
+<div>
+ <!doctype html><html lang="en"><head><meta charset="UTF-8"><title>Glosa static integration</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><link href="/css/glosa/mobile.min.css" rel="stylesheet" media="all and (max-width: 600px)"><link href="/css/glosa/desktop.min.css" rel="stylesheet" media="all and (min-width: 600px)"><script src="/js/vendors/vue.min.js"></script><script src="/js/vendors/axios.min.js"></script><script src="/js/vendors/ramda.min.js"></script><script defer="defer" src="/js/glosa.min.js"></script></head><body><section id="app-comments" class="comments"><!-- Head --><div class="comments__header"><div><button @click="openNewComment()" class="button comments-header__button-plus"><img alt="Add comment" class="comments-header__button-plus-img" src="/img/add-outline.svg"></button></div><p class="comments-header__count">{{ comments.length }} comments</p></div><!-- End head --><!-- New comment --><div class="new-comment" :class="{ 'show': showNewComment }"><div class="new-comment__position"><div class="new-comment__header"><div><button @click="closeNewComment()" class="button new-comment__button-close"><img alt="close" class="new-comment__button-plus-img" src="/img/close.svg"></button></div><p v-if="reply === undefined" class="new-comment__title">New comment</p><p v-else class="new-comment__title">Reply &nbsp;<strong>{{ formatEllipsisAuthor(replyComment.author) }}</strong></p></div><form><p><input v-model="newCommentAuthor" :disabled="this.loadingNewComment" maxlength="20" class="new-comment__author" type="text" placeholder="Name..."></p><p><textarea v-model="newCommentContent" :disabled="this.loadingNewComment" class="new-comment__content" placeholder="Message..."></textarea></p><div class="switch-button-policy"><!-- Checkbox --> <input v-model="policy" type="checkbox" name="switch-button" id="switch-label" class="switch-button__checkbox"><!-- Botón --> <label for="switch-label" class="switch-button__label"></label> <span class="switch-button-policy__text">I accept the policy of <a class="switch-button-policy__link" href="#">Data Protection</a>.</span></div><p class="new-comment__content-submit"><button class="new-comment__submit" type="button" @click="sendNewComment" :class="{ 'new-comment__submit--loading': loadingNewComment, 'new-comment__submit--success': stateNewComment === 'success', 'new-comment__submit--error': stateNewComment === 'error' }" :disabled="!isSubmit"><span v-if="!loadingNewComment && stateNewComment === undefined">Post</span> <span v-else-if="stateNewComment === 'success'">Published!</span> <span v-else-if="stateNewComment === 'error'">Whoops! Something has gone wrong, do we try again?</span> <span v-else>Sending...</span></button></p></form></div></div><!-- End new comment --><!-- Comments --><div v-if="commentsParent.length > 0" class="comments__list"><comment v-for="comment in commentsParent" :id="comment.id" :comments="comments"></div><!-- End Comments --><!-- No comments --><p v-else class="comments__clear">Write the first comment</p><!-- End no comments --></section><!-- Template comment  --><template id="comment"><div class="comment"><div class="comment__header"><!-- Date --><div class="comment__create-at">{{ formatDate(fields.createdAt) }}</div><!-- End date --><!-- Author --><div class="comment__author">{{ formatEllipsisAuthor(fields.author) }}</div><!-- End author --><!-- Button new comment --> <button class="button comment__reply" @click="openReply(id)"><img class="comment__reply-img" alt="Reply" src="/img/reply.svg"></button><!-- End button new comment --></div><!-- Separator --><hr class="comment__line"><!-- End separator --><!-- Content --><div class="comment__content">{{ filterHTMLTags(fields.message) }}</div><!-- End content --> <comment v-for="child in childs" :id="child.id" :comments="comments" :class="{ 'comment--child': child.deep <= maxDeep }"></div></template><!-- End template comment --></body></html>
+</div>
+
+
+<hr/>
+<div id="footercont" class="clearfix">Copyright &copy; 2021 Phondanai Khanti
+    <p>Powered by <a href="http://cryogenweb.org">Cryogen</a> | Free Website Template by <a title="free website templates" href="http://www.downloadwebsitetemplates.co.uk" rel="external">Download Website Templates</a></p>
+
+</div>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="/js/scripts.js" type="application/javascript"></script>
+
+
+</body>
+</html>
