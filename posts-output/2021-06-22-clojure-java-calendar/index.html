@@ -7,7 +7,7 @@
     <!-- Website Template designed by www.downloadwebsitetemplates.co.uk -->
     <!-- Modified to fit Cryogen.-->
     <meta charset="UTF-8">
-    <title>Phondanai&#39;s blog: Random things in my random life: ใช้ Java Calendar class ใน Clojure Ring</title>
+    <title>Phondanai&#39;s blog: Random things in my random life: ใช้ Java Calendar class ใน Clojure</title>
     
 <meta name="keywords" content="clojure,java,ring,cryogen">
 
@@ -16,7 +16,7 @@
 <meta property="og:description" content="พอดีวันนี้ได้ลองเล่น java interop ที่ใช้ class ของ Java ซึ่งตัวอย่างจะเกี่ยวกับวันที่และเวลา (Date &amp; Time) เท่าที่อ่านเจอในเน็ตจะใช้แบบนี้">
 
 <meta property="og:url" content="https://blog.nowaveform.me/posts-output/2021-06-22-clojure-java-calendar/" />
-<meta property="og:title" content="ใช้ Java Calendar class ใน Clojure Ring" />
+<meta property="og:title" content="ใช้ Java Calendar class ใน Clojure" />
 <meta property="og:type" content="article" />
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -91,7 +91,7 @@
         <strong>June 22, 2021</strong>
         
     </div>
-    <h1>ใช้ Java Calendar class ใน Clojure Ring</h1>
+    <h1>ใช้ Java Calendar class ใน Clojure</h1>
 </div>
 <div>
     
@@ -102,10 +102,10 @@ user=&gt; (.getDate date)
 22
 </code></pre><p>ซึ่งก็ปกติดี แต่คราวนี้ที่อยากได้คือ Day of year เช่นถ้าตาม <code>date</code> ข้างบน output ที่จะได้คือ <code>173</code> แปลว่าเป็นวันที่ <code>173</code> ของปีนี้</p><p>ถ้าใน Java จะใช้ <code>java.util.Calendar</code></p><pre><code class="java">Calendar calendar = Calendar.getInstance();
 int dayOfYear = calendar.get(Calendar.DAY_OF_YEAR);  
-</code></pre><p>เราจะแปลงโค้ดให้เป็น Clojure ได้แบบนี้</p><pre><code class="clojure">=&gt; (def date (java.util.Calendar/getInstace))
-=&gt; date
+</code></pre><p>เราจะแปลงโค้ดให้เป็น Clojure ได้แบบนี้</p><pre><code class="clojure">user=&gt; (def date (java.util.Calendar/getInstance))
+user=&gt; date
 #inst "2021-06-22T15:27:12.274+07:00"
-=&gt; (.get date (. java.util.Calendar DAY_OF_YEAR))
+user=&gt; (.get date (. java.util.Calendar DAY_OF_YEAR))
 173
 =&gt; (.get date (java.util.Calendar/DAY_OF_YEAR)) ; อันนี้น่าจะอ่านง่ายกว่า
 173
