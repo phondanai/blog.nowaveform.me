@@ -7,7 +7,7 @@
     <!-- Website Template designed by www.downloadwebsitetemplates.co.uk -->
     <!-- Modified to fit Cryogen.-->
     <meta charset="UTF-8">
-    <title>Phondanai&#39;s blog: Random things in my random life</title>
+    <title>Phondanai&#39;s blog: Random things in my random life: Posts Tagged &quot;java&quot;</title>
     
     <meta name="description" content="Random things in my random life.">
     <meta name="keywords" content="">
@@ -54,7 +54,7 @@
             <p><span class="fa fa-reorder"></span><strong>Menu</strong></p>
         </div>
         <ul class="menu">
-            <li  class="active" ><a title="Home" href="/">Home</a></li>
+            <li ><a title="Home" href="/">Home</a></li>
             <li ><a title="Archives" href="/archives/">Archives</a></li>
             
             <li ><a title="Tags" href="/tags/">Tags</a></li>
@@ -78,54 +78,17 @@
 
 <div id="right" class="clearfix">
     
-<div id="post">
-    <div class="post-header">
-    <div id="post-meta" class="row">
-        <strong>June 22, 2021</strong>
-        
+<div id="posts-by-tag">
+    <div id="page-header">
+        <h1>Posts Tagged &quot;java&quot;</h1>
     </div>
-    <h1>ใช้ Java Calendar class ใน Clojure Ring</h1>
-</div>
-<div>
+    <ul>
     
-    <p>พอดีวันนี้ได้ลองเล่น java interop ที่ใช้ class ของ Java ซึ่งตัวอย่างจะเกี่ยวกับวันที่และเวลา (Date &amp; Time) เท่าที่อ่านเจอในเน็ตจะใช้แบบนี้</p><pre><code class="clojure">user=&gt; (def date (java.uitl.Date.))
-user=&gt; date
-#inst "2021-06-22T15:09:15.448+07:00"
-user=&gt; (.getDate date)
-22
-</code></pre><p>ซึ่งก็ปกติดี แต่คราวนี้ที่อยากได้คือ Day of year เช่นถ้าตาม <code>date</code> ข้างบน output ที่จะได้คือ <code>173</code> แปลว่าเป็นวันที่ <code>173</code> ของปีนี้</p><p>ถ้าใน Java จะใช้ <code>java.util.Calendar</code></p><pre><code class="java">Calendar calendar = Calendar.getInstance();
-int dayOfYear = calendar.get(Calendar.DAY_OF_YEAR);  
-</code></pre><p>เราจะแปลงโค้ดให้เป็น Clojure ได้แบบนี้</p><pre><code class="clojure">=&gt; (def date (java.util.Calendar/getInstace))
-=&gt; date
-#inst "2021-06-22T15:27:12.274+07:00"
-=&gt; (.get date (. java.util.Calendar DAY_OF_YEAR))
-173
-=&gt; (.get date (java.util.Calendar/DAY_OF_YEAR)) ; อันนี้น่าจะอ่านง่ายกว่า
-173
-</code></pre><h3 id="reference">Reference</h3><ul><li><a href="https://stackoverflow.com/a/12525411">Java code (StackOverflow)</a></li></ul>
-</div>
-
-<div id="post-tags">
-    <br/> 
-    <b>Tags: </b>
+        <li>
+            <a href="/posts-output/2021-06-22-clojure-java-calendar/">ใช้ Java Calendar class ใน Clojure Ring</a>
+        </li>
     
-    <a href="/tags-output/clojure/">clojure</a>
-    
-    <a href="/tags-output/java/">java</a>
-    
-</div>
-
-<br/>
-
-
-    
-
-    <div id="prev-next">
-        
-        
-        <a class="button right" href="/posts-output/2021-06-01-clojure-ring-1/">Clojure Ring เบื้องต้น [1] &raquo;</a>
-        
-    </div>
+    </ul>
 </div>
 
 <hr/>

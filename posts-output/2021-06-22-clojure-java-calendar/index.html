@@ -7,11 +7,18 @@
     <!-- Website Template designed by www.downloadwebsitetemplates.co.uk -->
     <!-- Modified to fit Cryogen.-->
     <meta charset="UTF-8">
-    <title>Phondanai&#39;s blog: Random things in my random life</title>
+    <title>Phondanai&#39;s blog: Random things in my random life: ใช้ Java Calendar class ใน Clojure Ring</title>
     
-    <meta name="description" content="Random things in my random life.">
-    <meta name="keywords" content="">
-    
+<meta name="keywords" content="clojure,java,ring,cryogen">
+
+<meta name="description" content="พอดีวันนี้ได้ลองเล่น java interop ที่ใช้ class ของ Java ซึ่งตัวอย่างจะเกี่ยวกับวันที่และเวลา (Date &amp; Time) เท่าที่อ่านเจอในเน็ตจะใช้แบบนี้">
+
+<meta property="og:description" content="พอดีวันนี้ได้ลองเล่น java interop ที่ใช้ class ของ Java ซึ่งตัวอย่างจะเกี่ยวกับวันที่และเวลา (Date &amp; Time) เท่าที่อ่านเจอในเน็ตจะใช้แบบนี้">
+
+<meta property="og:url" content="https://blog.nowaveform.me/posts-output/2021-06-22-clojure-java-calendar/" />
+<meta property="og:title" content="ใช้ Java Calendar class ใน Clojure Ring" />
+<meta property="og:type" content="article" />
+
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114.png">
@@ -54,7 +61,7 @@
             <p><span class="fa fa-reorder"></span><strong>Menu</strong></p>
         </div>
         <ul class="menu">
-            <li  class="active" ><a title="Home" href="/">Home</a></li>
+            <li ><a title="Home" href="/">Home</a></li>
             <li ><a title="Archives" href="/archives/">Archives</a></li>
             
             <li ><a title="Tags" href="/tags/">Tags</a></li>
@@ -118,15 +125,22 @@ int dayOfYear = calendar.get(Calendar.DAY_OF_YEAR);
 <br/>
 
 
-    
-
     <div id="prev-next">
         
         
-        <a class="button right" href="/posts-output/2021-06-01-clojure-ring-1/">Clojure Ring เบื้องต้น [1] &raquo;</a>
+        <a class="right button" href="/posts-output/2021-06-01-clojure-ring-1/">Clojure Ring เบื้องต้น [1] &raquo;</a>
         
     </div>
+
+    
+
+
 </div>
+
+<div>
+ <!doctype html><html lang="en"><head><meta charset="UTF-8"><title>Glosa static integration</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><link href="/css/glosa/mobile.min.css" rel="stylesheet" media="all and (max-width: 600px)"><link href="/css/glosa/desktop.min.css" rel="stylesheet" media="all and (min-width: 600px)"><script src="/js/vendors/vue.min.js"></script><script src="/js/vendors/axios.min.js"></script><script src="/js/vendors/ramda.min.js"></script><script defer="defer" src="/js/glosa.min.js"></script></head><body><section id="app-comments" class="comments"><!-- Head --><div class="comments__header"><div><button @click="openNewComment()" class="button comments-header__button-plus"><img alt="Add comment" class="comments-header__button-plus-img" src="/img/add-outline.svg"></button></div><p class="comments-header__count">{{ comments.length }} comments</p></div><!-- End head --><!-- New comment --><div class="new-comment" :class="{ 'show': showNewComment }"><div class="new-comment__position"><div class="new-comment__header"><div><button @click="closeNewComment()" class="button new-comment__button-close"><img alt="close" class="new-comment__button-plus-img" src="/img/close.svg"></button></div><p v-if="reply === undefined" class="new-comment__title">New comment</p><p v-else class="new-comment__title">Reply &nbsp;<strong>{{ formatEllipsisAuthor(replyComment.author) }}</strong></p></div><form><p><input v-model="newCommentAuthor" :disabled="this.loadingNewComment" maxlength="20" class="new-comment__author" type="text" placeholder="Name..."></p><p><textarea v-model="newCommentContent" :disabled="this.loadingNewComment" class="new-comment__content" placeholder="Message..."></textarea></p><div class="switch-button-policy"><!-- Checkbox --> <input v-model="policy" type="checkbox" name="switch-button" id="switch-label" class="switch-button__checkbox"><!-- Botón --> <label for="switch-label" class="switch-button__label"></label> <span class="switch-button-policy__text">I accept the policy of <a class="switch-button-policy__link" href="#">Data Protection</a>.</span></div><p class="new-comment__content-submit"><button class="new-comment__submit" type="button" @click="sendNewComment" :class="{ 'new-comment__submit--loading': loadingNewComment, 'new-comment__submit--success': stateNewComment === 'success', 'new-comment__submit--error': stateNewComment === 'error' }" :disabled="!isSubmit"><span v-if="!loadingNewComment && stateNewComment === undefined">Post</span> <span v-else-if="stateNewComment === 'success'">Published!</span> <span v-else-if="stateNewComment === 'error'">Whoops! Something has gone wrong, do we try again?</span> <span v-else>Sending...</span></button></p></form></div></div><!-- End new comment --><!-- Comments --><div v-if="commentsParent.length > 0" class="comments__list"><comment v-for="comment in commentsParent" :id="comment.id" :comments="comments"></div><!-- End Comments --><!-- No comments --><p v-else class="comments__clear">Write the first comment</p><!-- End no comments --></section><!-- Template comment  --><template id="comment"><div class="comment"><div class="comment__header"><!-- Date --><div class="comment__create-at">{{ formatDate(fields.createdAt) }}</div><!-- End date --><!-- Author --><div class="comment__author">{{ formatEllipsisAuthor(fields.author) }}</div><!-- End author --><!-- Button new comment --> <button class="button comment__reply" @click="openReply(id)"><img class="comment__reply-img" alt="Reply" src="/img/reply.svg"></button><!-- End button new comment --></div><!-- Separator --><hr class="comment__line"><!-- End separator --><!-- Content --><div class="comment__content">{{ filterHTMLTags(fields.message) }}</div><!-- End content --> <comment v-for="child in childs" :id="child.id" :comments="comments" :class="{ 'comment--child': child.deep <= maxDeep }"></div></template><!-- End template comment --></body></html>
+</div>
+
 
 <hr/>
 <div id="footercont" class="clearfix">Copyright &copy; 2021 Phondanai Khanti
