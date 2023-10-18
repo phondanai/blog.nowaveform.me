@@ -7,16 +7,16 @@
     <!-- Website Template designed by www.downloadwebsitetemplates.co.uk -->
     <!-- Modified to fit Cryogen.-->
     <meta charset="UTF-8">
-    <title>Phondanai&#39;s blog: Random things in my random life: วิธีการใช้ Cryogen สำหรับสร้าง static website</title>
+    <title>Phondanai&#39;s blog: Random things in my random life: บันทึกการใช้คำสั่ง lpr</title>
     
 <meta name="keywords" content="linux,lpr,clojure,java,ring,cryogen">
 
-<meta name="description" content="CryogenCRYOGEN เป็น">
+<meta name="description" content="ปัญหาคือ ต้องการสั่งพิมพ์ไฟล์ pdf หลายๆ ไฟล์ในโฟลเดอร์ ผ่าน lpr ซึ่งบางไฟล์มีปัญหาพิมพ์ออกเครื่อง print มาแล้วไม่เต็มหน้าหรือขนาดใหญ่เกิน A4ซึ่งทั้งหมดนี้แก้ได้ผ่าน lpr โดยสิ่งที่ต้องการคือ">
 
-<meta property="og:description" content="CryogenCRYOGEN เป็น">
+<meta property="og:description" content="ปัญหาคือ ต้องการสั่งพิมพ์ไฟล์ pdf หลายๆ ไฟล์ในโฟลเดอร์ ผ่าน lpr ซึ่งบางไฟล์มีปัญหาพิมพ์ออกเครื่อง print มาแล้วไม่เต็มหน้าหรือขนาดใหญ่เกิน A4ซึ่งทั้งหมดนี้แก้ได้ผ่าน lpr โดยสิ่งที่ต้องการคือ">
 
-<meta property="og:url" content="https://memo.badbugs.cc/posts-output/2021-05-21-first-post/" />
-<meta property="og:title" content="วิธีการใช้ Cryogen สำหรับสร้าง static website" />
+<meta property="og:url" content="https://memo.badbugs.cc/posts-output/2023-10-18-lpr/" />
+<meta property="og:title" content="บันทึกการใช้คำสั่ง lpr" />
 <meta property="og:type" content="article" />
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -88,76 +88,29 @@
 <div id="post">
     <div class="post-header">
     <div id="post-meta" class="row">
-        <strong>May 21, 2021</strong>
+        <strong>October 18, 2023</strong>
         
     </div>
-    <h1>วิธีการใช้ Cryogen สำหรับสร้าง static website</h1>
+    <h1>บันทึกการใช้คำสั่ง lpr</h1>
 </div>
 <div>
-    <ol class="toc"><li><a href="#cryogen">Cryogen</a></li><li><a href="#สงทตองม">สิ่งที่ต้องมี</a></li><li><a href="#การใชงาน">การใช้งาน</a></li><ol><li><a href="#สรางไซตใหม">สร้างไซต์ใหม่</a></li><li><a href="#รน-server-ขนมา">รัน server ขึ้นมา</a></li><li><a href="#ตงคาตางๆ-ของเวบไซต">ตั้งค่าต่างๆ ของเว็บไซต์</a></li></ol><li><a href="#เอาเวบเราไปอพไวบนโฮสตง">เอาเว็บเราไปอัพไว้บนโฮสติ้ง</a></li></ol>
-    <h2 id="cryogen">Cryogen</h2><p><a href="http://cryogenweb.org">CRYOGEN</a> เป็น</p><ul><li>เครื่องมือสำหรับใช้สร้าง static site ประเภท blogging</li><li>พัฒนาโดยใช้ภาษา Clojure</li><li>รองรับการเขียนโดยใช้ Markdown และ AsciiDoc</li><li>มี syntax highlight สำหรับแสดงผลโค้ด</li><li>และอื่นๆ</li></ul><h2 id="สงทตองม">สิ่งที่ต้องมี</h2><ul><li><a href="https://clojure.org">Clojure</a></li><li><a href="https://github.com/technomancy/leiningen">Leiningen</a> เวอร์ชัน 2.5.0 ขึ้นไป</li></ul><h2 id="การใชงาน">การใช้งาน</h2><h3 id="สรางไซตใหม">สร้างไซต์ใหม่</h3><p>โดยการใช้ Cryogen template:</p><pre><code>lein new cryogen my-blog
-</code></pre><p>หรือ อีกวิธี ใช้ <a href="https://github.com/seancorfield/clj-new/"><code>clj-new</code></a>:</p><pre><code>clojure -X:new create :template cryogen :name me.my-blog
-</code></pre><h3 id="รน-server-ขนมา">รัน server ขึ้นมา</h3><p>เราสามารถรันเว็บขอเราขึ้นมาดูได้ อยู่ในไดเรกทอรี่ <code>my-blog</code> โดยใช้ Leiningen:</p><pre><code class="bash">lein serve # หรือ lein serve-fast
-</code></pre><p>หรือ tools-deps:</p><pre><code class="bash">clojure -X:serve # or clojure -X:serve-fast
-</code></pre><p>เมื่อ server start ขึ้นมาแล้ว ใช้ browser เปิดไปที่ <a href="http://localhost:3000">localhost:3000</a></p><p>ตัว server จะ monitor การแก้ไขไฟล์ที่อยู่ในโฟลเดอร์ <code>content</code> และ <code>themes</code> และ คอมไพล์ให้ใหม่โดยอัตโนมัติ. The <code>*-fast</code> variants perform <a href="https://cryogenweb.org/docs/fast-compilation.html">fast but partial compilation</a> of only the changed page/post.</p><p>หรือถ้าอยากจะ generate เว็บโดยที่ไม่ต้องรัน server ขึ้นมาเลยก็ทำได้ โดยใช้คำสั่ง:</p><pre><code>lein run
-</code></pre><p>หรือ:</p><pre><code>clojure -M:build
-</code></pre><h3 id="ตงคาตางๆ-ของเวบไซต">ตั้งค่าต่างๆ ของเว็บไซต์</h3><p>เราสามารถตั้งค่าต่างๆ ของเว็บไซต์ได้ โดยแก้ไขไฟล์ <code>content/config.edn</code>, ซึ่งมีค่าต่างๆ ประมาณนี้:</p><pre><code class="clojure">{:site-title                   "My Awesome Blog"
- :author                       "Bob Bobbert"
- :description                  "This blog is awesome"
- :site-url                     "http://blogawesome.com/"
- :post-root                    "posts"
- :page-root                    "pages"
- :post-root-uri                "posts-output"
- :page-root-uri                "pages-output"
- :tag-root-uri                 "tags-output"
- :author-root-uri              "authors-output"
- :public-dest                  "public"
- :blog-prefix                  "/blog"
- :rss-name                     "feed.xml"
- :rss-filters                  ["cryogen"]
- :recent-posts                 3
- :post-date-format             "yyyy-MM-dd"
- :archive-group-format         "yyyy MMMM"
- :sass-src                     []
- :sass-path                    "sass"
- :theme                        "blue"
- :resources                    ["img"]
- :keep-files                   [".git"]
- :disqus?                      false
- :disqus-shortname             ""
- :ignored-files                [#"\.#.*" #".*\.swp$"]
- :previews?                    false
- :posts-per-page               5
- :blocks-per-preview           2
- :clean-urls                   :trailing-slash
- :collapse-subdirs?            false
- :hide-future-posts?           true
- :klipse                       {}
- :description-include-elements #{:p :h1 :h2 :h3 :h4 :h5 :h6}
- :debug?                       false}
-</code></pre><p>รายละเอียดเกี่ยวกับค่าต่างๆ นั้น ไปหาอ่านเอาที่เว็บ <a href="http://cryogenweb.org/docs/configuration.html">http://cryogenweb.org/docs/configuration.html</a></p><h2 id="เอาเวบเราไปอพไวบนโฮสตง">เอาเว็บเราไปอัพไว้บนโฮสติ้ง</h2><p>หลังจาก generate แล้ว ไฟล์ที่เราต้องการนั้นจะอยู่ในโฟลเดอร์ <code>public</code> สิ่งที่ต้องทำก็คือ copy ไฟล์ทั้งหมดไปไว้ที่โฟลเดอร์ที่อยู่บนโฮสติ้งที่รันด้วย Nginx หรือ Apache</p><p>ตัวอย่างการตั้งค่า Nginx ในไฟล์ <code>/etc/nginx/sites-available/default</code>:</p><pre><code class="javascript">server {
-  listen 80 default_server;
-  listen [::]:80 default_server ipv6only=on;
-  server_name localhost &lt;yoursite.com&gt; &lt;www.yoursite.com&gt;;
-
-  access_log  /var/log/blog_access.log;
-  error_log   /var/log/blog_error.log;
-
-  location / {
-    alias       /var/blog/;
-    error_page  404 = /404.html;
-  }
-}
-</code></pre><p>แก้ส่วน <code>yoursite.com</code> ไปเป็นชื่อโดเมนของเรา โดยไฟล์ที่เรา copy มานั้นอยู่ในโฟลเดอร์ <code>/var/blog/</code> บน server</p><p>ข้อมูลเพิ่มเติมสามารถไปดูได้ที่ <a href="http://cryogenweb.org/docs/deploying-to-github-pages.html">หน้านี้</a>.</p>
+    
+    <p>ปัญหาคือ ต้องการสั่งพิมพ์ไฟล์ pdf หลายๆ ไฟล์ในโฟลเดอร์ ผ่าน <code>lpr</code> ซึ่งบางไฟล์มีปัญหาพิมพ์ออกเครื่อง print มาแล้วไม่เต็มหน้าหรือขนาดใหญ่เกิน A4</p><p>ซึ่งทั้งหมดนี้แก้ได้ผ่าน <code>lpr</code> โดยสิ่งที่ต้องการคือ</p><ul><li>ขนาดกระดาษ A4</li><li>พิมพ์หน้าเดียว</li><li>พิมพ์เฉพาะขาว-ดำ</li></ul><p>คำสั่งและ options ต่างๆ ที่ต้องการก็จะตามนี้</p><pre><code class="bash">for f in *;
+  do lpr -o ColorModel=KGray \
+         -o PageSize=A4 \ 
+         -o fit-to-page \
+         -o sides=one-sided "$f";
+done
+</code></pre><h3 id="reference">Reference</h3><ul><li><a href="https://warwick.ac.uk/services/its/servicessupport/computers/linuxworkstationguide/faqsandtips/lprforcesinglesided/">How can I force single sided printing with lpr?</a></li></ul>
 </div>
 
 <div id="post-tags">
     <br/> 
     <b>Tags: </b>
     
-    <a href="/tags-output/cryogen/">cryogen</a>
+    <a href="/tags-output/linux/">linux</a>
     
-    <a href="/tags-output/clojure/">clojure</a>
+    <a href="/tags-output/lpr/">lpr</a>
     
 </div>
 
@@ -166,8 +119,8 @@
 
     <div id="prev-next">
         
-        <a class="button" href="/posts-output/2021-06-01-clojure-ring-1/">&laquo; Clojure Ring เบื้องต้น [1]</a>
         
+        <a class="right button" href="/posts-output/2021-06-22-clojure-java-calendar/">ใช้ Java Calendar class ใน Clojure &raquo;</a>
         
     </div>
 
